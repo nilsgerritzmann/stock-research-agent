@@ -1,0 +1,19 @@
+# Secrets — never commit
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Local data cache (re-downloadable from SEC)
+.cache/
+
+# Memos: only chosen samples are committed (see memos/samples/)
+memos/*.md
+
+# OS / editor
+.DS_Store
+.vscode/
