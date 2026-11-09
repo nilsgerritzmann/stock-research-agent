@@ -1,0 +1,87 @@
+# Investment criteria. Edit thresholds here — no code changes needed.
+#
+# metric:   which calculated figure to test (see src/research_agent/metrics.py)
+# operator: ">=" or "<="
+# threshold: number in the metric's unit (percentages as e.g. 15 for 15%)
+
+years: 5   # number of fiscal years to analyse
+
+criteria:
+  - id: revenue_growth
+    name: Revenue growth (CAGR)
+    metric: revenue_cagr
+    operator: ">="
+    threshold: 5
+    unit: "%"
+    why: Is the business growing?
+
+  - id: operating_margin
+    name: Operating margin (latest year)
+    metric: operating_margin
+    operator: ">="
+    threshold: 15
+    unit: "%"
+    why: Pricing power and cost discipline.
+
+  - id: roic
+    name: Return on invested capital (latest year)
+    metric: roic
+    operator: ">="
+    threshold: 12
+    unit: "%"
+    why: Does the company earn more than its cost of capital?
+
+  - id: fcf_conversion
+    name: FCF conversion (sum of all years, FCF / net income)
+    metric: fcf_conversion
+    operator: ">="
+    threshold: 80
+    unit: "%"
+    why: Are reported profits backed by cash?
+
+  - id: fcf_positive
+    name: Free cash flow positive in every year
+    metric: fcf_negative_years
+    operator: "<="
+    threshold: 0
+    unit: "negative years"
+    why: Consistent cash generation.
+
+  - id: leverage
+    name: Net debt / EBITDA (latest year)
+    metric: net_debt_to_ebitda
+    operator: "<="
+    threshold: 2.0
+    unit: "x"
+    why: Balance-sheet risk.
+
+  - id: interest_coverage
+    name: Interest coverage, EBIT / interest (latest year)
+    metric: interest_coverage
+    operator: ">="
+    threshold: 8
+    unit: "x"
+    why: Can the company comfortably carry its debt?
+
+  - id: dilution
+    name: Diluted share count growth (CAGR)
+    metric: diluted_shares_cagr
+    operator: "<="
+    threshold: 2
+    unit: "%"
+    why: Are existing shareholders being diluted?
+
+  - id: fcf_yield
+    name: Free cash flow yield (latest FCF / market cap)
+    metric: fcf_yield
+    operator: ">="
+    threshold: 4
+    unit: "%"
+    why: Is the price reasonable relative to cash generation?
+
+# Changes that would trigger a deep dive (investigated by the agent from v2 on;
+# in v1 they are flagged as open questions in the memo).
+deep_dive_triggers:
+  operating_margin_change_pp: 3     # year-on-year move in percentage points
+  revenue_growth_swing_pp: 10       # change in YoY growth rate, percentage points
+  any_failed_criterion: true

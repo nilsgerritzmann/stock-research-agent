@@ -1,0 +1,29 @@
+[project]
+name = "research-agent"
+version = "0.1.0"
+description = "Research memos on US companies from SEC EDGAR data, where every number has a source."
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+    "yfinance>=0.2.40",
+    "claude-agent-sdk>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+research = "research_agent.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["research_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

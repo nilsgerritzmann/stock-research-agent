@@ -2,7 +2,7 @@
 .env
 
 # Python
-.venv/
+.venv
 __pycache__/
 *.pyc
 *.egg-info/
@@ -17,3 +17,4 @@ memos/*.md
 # OS / editor
 .DS_Store
 .vscode/
+.venv.nosync/
